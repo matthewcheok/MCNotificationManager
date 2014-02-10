@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MCViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Akj-uc-6HT"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tqb-gc-ROG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pX0-yN-bZ7">
+                                <rect key="frame" x="20" y="389" width="728" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Cloud Notification">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showCloud:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KNv-Qq-8eC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fjb-PN-adX">
+                                <rect key="frame" x="20" y="439" width="728" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Like Notification">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showLike:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fij-yB-fLW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdO-DB-dkp">
+                                <rect key="frame" x="20" y="339" width="728" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Server Notification">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showConnection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="otU-T7-V08"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ul-1a-jVU">
+                                <rect key="frame" x="20" y="489" width="728" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Chat Notification">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showChat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fAK-NL-CUO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLo-XS-BSM">
+                                <rect key="frame" x="20" y="539" width="728" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Archived Notification">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showArchived:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S2U-b0-DhQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9Ul-1a-jVU" firstAttribute="top" secondItem="Fjb-PN-adX" secondAttribute="bottom" constant="17" id="99q-j8-RyB"/>
+                            <constraint firstItem="vLo-XS-BSM" firstAttribute="top" secondItem="9Ul-1a-jVU" secondAttribute="bottom" constant="17" id="BU4-3E-2AE"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="leading" secondItem="pX0-yN-bZ7" secondAttribute="leading" id="BbC-3F-kwa"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="trailing" secondItem="9Ul-1a-jVU" secondAttribute="trailing" id="M3U-eF-k7X"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="leading" secondItem="Fjb-PN-adX" secondAttribute="leading" id="NLE-OR-JEx"/>
+                            <constraint firstAttribute="trailing" secondItem="qdO-DB-dkp" secondAttribute="trailing" constant="20" symbolic="YES" id="PDZ-U7-Wo9"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="trailing" secondItem="vLo-XS-BSM" secondAttribute="trailing" id="UCv-VH-jau"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="X4f-2W-Vl9"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="trailing" secondItem="pX0-yN-bZ7" secondAttribute="trailing" id="iO1-5P-3QO"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="leading" secondItem="vLo-XS-BSM" secondAttribute="leading" id="lv5-fd-wZd"/>
+                            <constraint firstItem="pX0-yN-bZ7" firstAttribute="top" secondItem="qdO-DB-dkp" secondAttribute="bottom" constant="17" id="n9r-QB-k36"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="leading" secondItem="9Ul-1a-jVU" secondAttribute="leading" id="nWN-aQ-gvx"/>
+                            <constraint firstItem="Fjb-PN-adX" firstAttribute="top" secondItem="pX0-yN-bZ7" secondAttribute="bottom" constant="17" id="qDd-5a-RBq"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="top" secondItem="Akj-uc-6HT" secondAttribute="bottom" constant="319" id="qLo-BU-fZv"/>
+                            <constraint firstItem="qdO-DB-dkp" firstAttribute="trailing" secondItem="Fjb-PN-adX" secondAttribute="trailing" id="zjr-2m-HdW"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>
