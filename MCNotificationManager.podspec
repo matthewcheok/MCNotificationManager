@@ -7,7 +7,9 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/matthewcheok/MCNotificationManager'
   s.author   = { 'Matthew Cheok' => 'cheok.jz@gmail.com' }
   s.requires_arc = true
-  s.source   = { :git => 'https://github.com/matthewcheok/MCNotificationManager.git', :branch => 'master', :tag => s.version.to_s }
+  s.source   = { 
+      :git => 'https://github.com/matthewcheok/MCNotificationManager.git', :branch => 'master', 
+      :tag => s.version.to_s 
+}
   s.source_files = 'MCNotificationManager/*.{h,m}'
-  s.public_header_files = 'MCNotificationManager/MCNotificationManager.h'
 end
