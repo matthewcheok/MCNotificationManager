@@ -91,6 +91,8 @@ static CGFloat const kMCNotificationViewImageSize = 44;
     self.textLabel.textColor = notification.tintColor;
     self.detailTextLabel.textColor = notification.tintColor;
     
+    [self addTarget:notification.target action:notification.action forControlEvents:notification.controlEvents];
+    
     [self setNeedsLayout];
 }
 
