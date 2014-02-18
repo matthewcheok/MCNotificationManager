@@ -17,6 +17,13 @@
 @property (strong, nonatomic) UIColor *tintColor;
 @property (strong, nonatomic) UIColor *backgroundColor;
 
+@property (strong, nonatomic) NSDictionary *userInfo;
+
+@property (weak, nonatomic, readonly) id target;
+@property (assign, nonatomic, readonly) SEL action;
+@property (assign, nonatomic, readonly) UIControlEvents controlEvents;
+
 + (instancetype)notification;
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
 
 @end

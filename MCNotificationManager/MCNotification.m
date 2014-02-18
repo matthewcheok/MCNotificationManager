@@ -8,6 +8,9 @@
 
 #import "MCNotification.h"
 
+@interface MCNotification()
+@end
+
 @implementation MCNotification
 
 + (instancetype)notification {
@@ -20,6 +23,12 @@
         _tintColor = [UIColor whiteColor];
     }
     return self;
+}
+
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    _target = target;
+    _action = action;
+    _controlEvents = controlEvents;
 }
 
 @end
