@@ -83,7 +83,7 @@ static CGFloat const kMCNotificationViewImageSize = 44;
 - (void)setNotification:(MCNotification *)notification {
     _notification = notification;
     
-    self.imageView.image = [notification.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.imageView.image = notification.image;
 	self.textLabel.text = notification.text;
     self.detailTextLabel.text = notification.detailText;
     
