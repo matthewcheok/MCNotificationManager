@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'MCNotificationManager'
-  s.version  = '0.1.1'
+  s.version  = '0.1.2'
   s.platform = :ios, '7.0'
   s.license  = { :type => 'MIT', :file => 'LICENSE' }
   s.summary  = 'Show your own banners like Notification Center within your app.'
@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
       :tag => s.version.to_s
 }
   s.source_files = 'MCNotificationManager/*.{h,m}'
+  s.public_header_files = 'MCNotificationManager/{MCNotificationManager,MCNotification}.h'
 end
