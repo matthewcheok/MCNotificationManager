@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIColor *backgroundColor;
 
 @property (strong, nonatomic) NSDictionary *userInfo;
+@property (assign, nonatomic) NSTimeInterval duration;
 
 @property (weak, nonatomic, readonly) id target;
 @property (assign, nonatomic, readonly) SEL action;

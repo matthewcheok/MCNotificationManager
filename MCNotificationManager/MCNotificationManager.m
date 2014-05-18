@@ -54,6 +54,9 @@ static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
         MCNotificationView *view = [MCNotificationView view];
         view.notification = notification;
         
+        if (0 == notification.duration)
+            notification.duration = kMCNotificationManagerPresentationDuration;
+        
         UIView *containerView = [self containerViewInKeyWindow];
         
         // create banner view
@@ -78,7 +81,7 @@ static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
             strongSelf.bannerView.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
             typeof(self) strongSelf = weakSelf;
-		    [strongSelf performSelector:@selector(hideNotification) withObject:nil afterDelay:kMCNotificationManagerPresentationDuration];
+		    [strongSelf performSelector:@selector(hideNotification) withObject:nil afterDelay:notification.duration];
         }];
     }
 }
