@@ -51,6 +51,10 @@ static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
         MCNotification *notification = [self.queue firstObject];
         [self.queue removeObjectAtIndex:0];
         
+        if (nil == notification.target)
+            [notification addTarget:self action:@selector(hideNotification)
+                   forControlEvents:UIControlEventTouchUpInside];
+        
         MCNotificationView *view = [MCNotificationView view];
         view.notification = notification;
         
