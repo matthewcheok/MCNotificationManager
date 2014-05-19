@@ -51,8 +51,15 @@ static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
         MCNotification *notification = [self.queue firstObject];
         [self.queue removeObjectAtIndex:0];
         
+        if (nil == notification.target)
+            [notification addTarget:self action:@selector(hideNotification)
+                   forControlEvents:UIControlEventTouchUpInside];
+        
         MCNotificationView *view = [MCNotificationView view];
         view.notification = notification;
+        
+        if (0 == notification.duration)
+            notification.duration = kMCNotificationManagerPresentationDuration;
         
         UIView *containerView = [self containerViewInKeyWindow];
         
@@ -78,7 +85,7 @@ static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
             strongSelf.bannerView.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
             typeof(self) strongSelf = weakSelf;
-		    [strongSelf performSelector:@selector(hideNotification) withObject:nil afterDelay:kMCNotificationManagerPresentationDuration];
+		    [strongSelf performSelector:@selector(hideNotification) withObject:nil afterDelay:notification.duration];
         }];
     }
 }

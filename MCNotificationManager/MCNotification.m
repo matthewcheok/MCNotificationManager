@@ -21,6 +21,7 @@
     self = [super init];
     if (self) {
         _tintColor = [UIColor whiteColor];
+        _duration = 0;
     }
     return self;
 }
