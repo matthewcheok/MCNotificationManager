@@ -65,8 +65,10 @@ static CGFloat const kMCNotificationViewImageSize = 44;
                                           20,
                                           kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
                                           44);
+        self.textLabel.numberOfLines = 2;
     }
     else {
+        self.textLabel.numberOfLines = 1;
         self.textLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
                                           20+22-[self.textLabel.font lineHeight],
                                           kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
