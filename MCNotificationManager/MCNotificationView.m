@@ -59,23 +59,27 @@ static CGFloat const kMCNotificationViewImageSize = 44;
                                       kMCNotificationViewImageSize,
                                       kMCNotificationViewImageSize);
     
+    CGFloat imageWidth = self.imageView.image ? kMCNotificationViewImageSize : 0;
+    CGFloat textX = offset+imageWidth+kMCNotificationViewPadding;
+    CGFloat textWidth = kMCNotificationViewWidth-imageWidth-kMCNotificationViewPadding;
+    
     if (!self.detailTextLabel.text ||
         [self.detailTextLabel.text isEqualToString:@""]) {
-        self.textLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
+        self.textLabel.frame = CGRectMake(textX,
                                           20,
-                                          kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                          textWidth,
                                           44);
         self.textLabel.numberOfLines = 2;
     }
     else {
         self.textLabel.numberOfLines = 1;
-        self.textLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
+        self.textLabel.frame = CGRectMake(textX,
                                           20+22-[self.textLabel.font lineHeight],
-                                          kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                          textWidth,
                                           22);
-        self.detailTextLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
+        self.detailTextLabel.frame = CGRectMake(textX,
                                                 20+20,
-                                                kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                                textWidth,
                                                 22);
     }
 }
