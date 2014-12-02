@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class MCNotification;
+
+@protocol MCNotificationView
+@property (strong, nonatomic) MCNotification *notification;
+@end
+
+
 @interface MCNotification : NSObject
 
 @property (strong, nonatomic) UIImage *image;
@@ -19,6 +26,8 @@
 @property (strong, nonatomic) UIFont *detailTextFont;
 @property (strong, nonatomic) UIColor *textColor;
 @property (assign, nonatomic) CGFloat height;
+
+@property (assign, nonatomic) Class viewClass;
 
 @property (strong, nonatomic) UIColor *tintColor;
 @property (strong, nonatomic) UIColor *backgroundColor;

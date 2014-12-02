@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MCNotification.h"
 
-@interface MCNotificationView : UIControl
+@interface MCNotificationView : UIControl <MCNotificationView>
 
 @property (strong, nonatomic) MCNotification *notification;
-
-+ (instancetype)view;
 
 @end

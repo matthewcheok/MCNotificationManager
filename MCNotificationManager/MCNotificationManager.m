@@ -13,6 +13,9 @@
 static NSTimeInterval const kMCNotificationManagerAnimationDuration    = 0.3;
 static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
 
+extern CGFloat const kMCNotificationDefaultViewWidth;
+extern CGFloat const kMCNotificationDefaultViewHeight;
+
 @interface MCNotificationManager ()
 
 @property (strong, nonatomic) NSMutableArray *queue;
@@ -54,8 +57,10 @@ static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
         if (nil == notification.target)
             [notification addTarget:self action:@selector(hideNotification)
                    forControlEvents:UIControlEventTouchUpInside];
-        
-        MCNotificationView *view = [MCNotificationView view];
+
+        MCNotificationView *view = nil;
+        NSAssert([notification.viewClass conformsToProtocol:@protocol(MCNotificationView)],@"Not conform to protocol");
+        view = [[notification.viewClass alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationDefaultViewWidth, kMCNotificationDefaultViewHeight)];
         view.notification = notification;
         
         if (0 == notification.duration)

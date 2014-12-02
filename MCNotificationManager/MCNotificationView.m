@@ -8,7 +8,7 @@
 
 #import "MCNotificationView.h"
 
-static CGFloat const kMCNotificationViewWidth     = 300;
+CGFloat const kMCNotificationDefaultViewWidth     = 300;
 CGFloat const kMCNotificationDefaultViewHeight    = 64;
 static CGFloat const kMCNotificationViewPadding   = 10;
 static CGFloat const kMCNotificationViewImageSize = 44;
@@ -22,10 +22,6 @@ static CGFloat const kMCNotificationViewImageSize = 44;
 @end
 
 @implementation MCNotificationView
-
-+ (instancetype)view {
-    return [[self alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationViewWidth, kMCNotificationDefaultViewHeight)];
-}
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
@@ -51,7 +47,7 @@ static CGFloat const kMCNotificationViewImageSize = 44;
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	CGRect bounds = self.bounds;
-    CGFloat offset = (CGRectGetWidth(bounds)-kMCNotificationViewWidth)/2;
+    CGFloat offset = (CGRectGetWidth(bounds)-kMCNotificationDefaultViewWidth)/2;
     
 	bounds.origin.y += 20; bounds.size.height -= 20;
 	self.imageView.frame = CGRectMake(offset,
@@ -63,17 +59,17 @@ static CGFloat const kMCNotificationViewImageSize = 44;
         [self.detailTextLabel.text isEqualToString:@""]) {
         self.textLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
                                           20,
-                                          kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                          kMCNotificationDefaultViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
                                           44);
     }
     else {
         self.textLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
                                           20+22-[self.textLabel.font lineHeight],
-                                          kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                          kMCNotificationDefaultViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
                                           22);
         self.detailTextLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
                                                 20+20,
-                                                kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                                kMCNotificationDefaultViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
                                                 22);
     }
 }
