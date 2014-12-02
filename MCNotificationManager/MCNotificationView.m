@@ -31,7 +31,7 @@ static CGFloat const kMCNotificationViewImageSize = 44;
 	self = [super initWithFrame:frame];
 	if (self) {
 		_imageView = [[UIImageView alloc] init];
-        _imageView.contentMode = UIViewContentModeRight;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
 		_imageView.tintColor = [UIColor whiteColor];
 		[self addSubview:_imageView];
         
@@ -85,11 +85,22 @@ static CGFloat const kMCNotificationViewImageSize = 44;
     
     self.imageView.image = notification.image;
 	self.textLabel.text = notification.text;
-    self.detailTextLabel.text = notification.detailText;
+    if (notification.attributedText) {
+        self.textLabel.attributedText = notification.attributedText;
+    }
+    if (notification.attributedDetailText) {
+        self.detailTextLabel.attributedText = notification.attributedDetailText;
+    }
     
     self.imageView.tintColor = notification.tintColor;
-    self.textLabel.textColor = notification.tintColor;
-    self.detailTextLabel.textColor = notification.tintColor;
+    self.textLabel.textColor = notification.textColor;
+    if (notification.textFont) {
+        self.textLabel.font = notification.textFont;
+    }
+    if (notification.detailTextFont) {
+        self.detailTextLabel.font = notification.detailTextFont;
+    }
+    self.detailTextLabel.textColor = notification.textColor;
     
     [self addTarget:notification.target action:notification.action forControlEvents:notification.controlEvents];
     
