@@ -9,7 +9,7 @@
 #import "MCNotificationView.h"
 
 static CGFloat const kMCNotificationViewWidth     = 300;
-static CGFloat const kMCNotificationViewHeight    = 64;
+CGFloat const kMCNotificationDefaultViewHeight    = 64;
 static CGFloat const kMCNotificationViewPadding   = 10;
 static CGFloat const kMCNotificationViewImageSize = 44;
 
@@ -24,7 +24,7 @@ static CGFloat const kMCNotificationViewImageSize = 44;
 @implementation MCNotificationView
 
 + (instancetype)view {
-    return [[self alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationViewWidth, kMCNotificationViewHeight)];
+    return [[self alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationViewWidth, kMCNotificationDefaultViewHeight)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -101,6 +101,10 @@ static CGFloat const kMCNotificationViewImageSize = 44;
         self.detailTextLabel.font = notification.detailTextFont;
     }
     self.detailTextLabel.textColor = notification.textColor;
+    
+    if (self.frame.size.width != notification.height) {
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, notification.height)];
+    }
     
     [self addTarget:notification.target action:notification.action forControlEvents:notification.controlEvents];
     

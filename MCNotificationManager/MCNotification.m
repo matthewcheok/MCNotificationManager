@@ -8,6 +8,8 @@
 
 #import "MCNotification.h"
 
+extern CGFloat const kMCNotificationDefaultViewHeight;
+
 @interface MCNotification()
 @end
 
@@ -24,6 +26,11 @@
         _duration = 0;
     }
     return self;
+}
+
+- (CGFloat)height
+{
+    return _height ?: kMCNotificationDefaultViewHeight;
 }
 
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {

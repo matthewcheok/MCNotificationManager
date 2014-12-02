@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSAttributedString *attributedDetailText;
 @property (strong, nonatomic) UIFont *detailTextFont;
 @property (strong, nonatomic) UIColor *textColor;
+@property (assign, nonatomic) CGFloat height;
 
 @property (strong, nonatomic) UIColor *tintColor;
 @property (strong, nonatomic) UIColor *backgroundColor;
