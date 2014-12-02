@@ -58,9 +58,15 @@ extern CGFloat const kMCNotificationDefaultViewHeight;
             [notification addTarget:self action:@selector(hideNotification)
                    forControlEvents:UIControlEventTouchUpInside];
 
-        MCNotificationView *view = nil;
         NSAssert([notification.viewClass conformsToProtocol:@protocol(MCNotificationView)],@"Not conform to protocol");
-        view = [[notification.viewClass alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationDefaultViewWidth, kMCNotificationDefaultViewHeight)];
+        // try nib with the same name
+        MCNotificationView *view = nil;
+        UINib *viewNib = [UINib nibWithNibName:NSStringFromClass(notification.viewClass) bundle:nil];
+        if (viewNib) {
+            view = [[viewNib instantiateWithOwner:nil options:nil] firstObject];
+        } else {
+            view = [[notification.viewClass alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationDefaultViewWidth, kMCNotificationDefaultViewHeight)];
+        }
         view.notification = notification;
         
         if (0 == notification.duration)
