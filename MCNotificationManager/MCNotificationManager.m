@@ -63,7 +63,10 @@ extern CGFloat const kMCNotificationDefaultViewHeight;
         MCNotificationView *view = nil;
         UINib *viewNib = [UINib nibWithNibName:NSStringFromClass(notification.viewClass) bundle:nil];
         if (viewNib) {
-            view = [[viewNib instantiateWithOwner:nil options:nil] firstObject];
+            view = [[viewNib instantiateWithOwner:self options:nil] firstObject];
+            if (view.constraints.count > 0) {
+                view.translatesAutoresizingMaskIntoConstraints = NO;
+            }
         } else {
             view = [[notification.viewClass alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationDefaultViewWidth, kMCNotificationDefaultViewHeight)];
         }
@@ -73,6 +76,7 @@ extern CGFloat const kMCNotificationDefaultViewHeight;
             notification.duration = kMCNotificationManagerPresentationDuration;
         
         UIView *containerView = [self containerViewInKeyWindow];
+        
         
         // create banner view
         UIToolbar *bannerView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(containerView.bounds), CGRectGetHeight(view.frame))];
@@ -86,7 +90,13 @@ extern CGFloat const kMCNotificationDefaultViewHeight;
         // create view hierarchy
         [bannerView addSubview:view];
         self.bannerView = bannerView;
-        
+
+        // setup constraints
+        if (view.constraints.count > 0) {
+            [bannerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": view}]];
+            [bannerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": view}]];
+        }
+
         [containerView addSubview:self.bannerView];
         self.bannerView.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.bannerView.frame));
         
