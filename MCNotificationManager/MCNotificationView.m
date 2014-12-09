@@ -8,8 +8,8 @@
 
 #import "MCNotificationView.h"
 
-static CGFloat const kMCNotificationViewWidth     = 300;
-static CGFloat const kMCNotificationViewHeight    = 64;
+CGFloat const kMCNotificationDefaultViewWidth     = 300;
+CGFloat const kMCNotificationDefaultViewHeight    = 64;
 static CGFloat const kMCNotificationViewPadding   = 10;
 static CGFloat const kMCNotificationViewImageSize = 44;
 
@@ -23,15 +23,11 @@ static CGFloat const kMCNotificationViewImageSize = 44;
 
 @implementation MCNotificationView
 
-+ (instancetype)view {
-    return [[self alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationViewWidth, kMCNotificationViewHeight)];
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
 		_imageView = [[UIImageView alloc] init];
-        _imageView.contentMode = UIViewContentModeRight;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
 		_imageView.tintColor = [UIColor whiteColor];
 		[self addSubview:_imageView];
         
@@ -51,7 +47,7 @@ static CGFloat const kMCNotificationViewImageSize = 44;
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	CGRect bounds = self.bounds;
-    CGFloat offset = (CGRectGetWidth(bounds)-kMCNotificationViewWidth)/2;
+    CGFloat offset = (CGRectGetWidth(bounds)-kMCNotificationDefaultViewWidth)/2;
     
 	bounds.origin.y += 20; bounds.size.height -= 20;
 	self.imageView.frame = CGRectMake(offset,
@@ -63,17 +59,17 @@ static CGFloat const kMCNotificationViewImageSize = 44;
         [self.detailTextLabel.text isEqualToString:@""]) {
         self.textLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
                                           20,
-                                          kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                          kMCNotificationDefaultViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
                                           44);
     }
     else {
         self.textLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
                                           20+22-[self.textLabel.font lineHeight],
-                                          kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                          kMCNotificationDefaultViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
                                           22);
         self.detailTextLabel.frame = CGRectMake(offset+kMCNotificationViewImageSize+kMCNotificationViewPadding,
                                                 20+20,
-                                                kMCNotificationViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
+                                                kMCNotificationDefaultViewWidth-kMCNotificationViewImageSize-kMCNotificationViewPadding,
                                                 22);
     }
 }
@@ -85,11 +81,26 @@ static CGFloat const kMCNotificationViewImageSize = 44;
     
     self.imageView.image = notification.image;
 	self.textLabel.text = notification.text;
-    self.detailTextLabel.text = notification.detailText;
+    if (notification.attributedText) {
+        self.textLabel.attributedText = notification.attributedText;
+    }
+    if (notification.attributedDetailText) {
+        self.detailTextLabel.attributedText = notification.attributedDetailText;
+    }
     
     self.imageView.tintColor = notification.tintColor;
-    self.textLabel.textColor = notification.tintColor;
-    self.detailTextLabel.textColor = notification.tintColor;
+    self.textLabel.textColor = notification.textColor;
+    if (notification.textFont) {
+        self.textLabel.font = notification.textFont;
+    }
+    if (notification.detailTextFont) {
+        self.detailTextLabel.font = notification.detailTextFont;
+    }
+    self.detailTextLabel.textColor = notification.textColor;
+    
+    if (self.frame.size.width != notification.height) {
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, notification.height)];
+    }
     
     [self addTarget:notification.target action:notification.action forControlEvents:notification.controlEvents];
     

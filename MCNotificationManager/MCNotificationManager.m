@@ -13,6 +13,9 @@
 static NSTimeInterval const kMCNotificationManagerAnimationDuration    = 0.3;
 static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
 
+extern CGFloat const kMCNotificationDefaultViewWidth;
+extern CGFloat const kMCNotificationDefaultViewHeight;
+
 @interface MCNotificationManager ()
 
 @property (strong, nonatomic) NSMutableArray *queue;
@@ -54,14 +57,26 @@ static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
         if (nil == notification.target)
             [notification addTarget:self action:@selector(hideNotification)
                    forControlEvents:UIControlEventTouchUpInside];
-        
-        MCNotificationView *view = [MCNotificationView view];
+
+        NSAssert([notification.viewClass conformsToProtocol:@protocol(MCNotificationView)],@"Not conform to protocol");
+        // try nib with the same name
+        MCNotificationView *view = nil;
+        UINib *viewNib = [UINib nibWithNibName:NSStringFromClass(notification.viewClass) bundle:nil];
+        if (viewNib) {
+            view = [[viewNib instantiateWithOwner:self options:nil] firstObject];
+            if (view.constraints.count > 0) {
+                view.translatesAutoresizingMaskIntoConstraints = NO;
+            }
+        } else {
+            view = [[notification.viewClass alloc] initWithFrame:CGRectMake(0, 0, kMCNotificationDefaultViewWidth, kMCNotificationDefaultViewHeight)];
+        }
         view.notification = notification;
         
         if (0 == notification.duration)
             notification.duration = kMCNotificationManagerPresentationDuration;
         
         UIView *containerView = [self containerViewInKeyWindow];
+        
         
         // create banner view
         UIToolbar *bannerView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(containerView.bounds), CGRectGetHeight(view.frame))];
@@ -75,7 +90,13 @@ static NSTimeInterval const kMCNotificationManagerPresentationDuration = 3;
         // create view hierarchy
         [bannerView addSubview:view];
         self.bannerView = bannerView;
-        
+
+        // setup constraints
+        if (view.constraints.count > 0) {
+            [bannerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": view}]];
+            [bannerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": view}]];
+        }
+
         [containerView addSubview:self.bannerView];
         self.bannerView.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.bannerView.frame));
         
